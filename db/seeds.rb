@@ -1,5 +1,6 @@
 require 'faker'
 
+def pause
 10.times do
 	City.create(name: Faker::Address.city, zip_code: Faker::Address.zip)
 end
@@ -19,6 +20,12 @@ end
 1.upto(20) do |index|
 	TagList.create(gossip: Gossip.find(index), tag: Tag.all.sample)	
 end
+end
 
-
+20.times do
+	message =PrivateMessage.create(sender: User.all.sample, content: Faker::Movies::HarryPotter.quote)
+	rand(1..6).times do
+		Recipient.create(private_message: message, user: User.all.sample)
+	end
+end
 puts "all entries added"
